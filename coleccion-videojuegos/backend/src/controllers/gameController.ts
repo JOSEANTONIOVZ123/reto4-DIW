@@ -1,8 +1,10 @@
 import db from "../db/database";
 import { Request, Response } from "express";
 
-export const getGames = (req: Request, res: Response) => {
-  const { usuario_id } = req.query;
+type AuthRequest = Request & { user?: { id: number; username?: string } };
+
+export const getGames = (req: AuthRequest, res: Response) => {
+  const usuario_id = req.user?.id;
 
   const juegos = db
     .prepare("SELECT * FROM videojuegos WHERE usuario_id=?")
@@ -11,8 +13,9 @@ export const getGames = (req: Request, res: Response) => {
   res.json(juegos);
 };
 
-export const addGame = (req: Request, res: Response) => {
-  const { titulo, plataforma, genero, estado, usuario_id } = req.body;
+export const addGame = (req: AuthRequest, res: Response) => {
+  const { titulo, plataforma, genero, estado } = req.body;
+  const usuario_id = req.user?.id;
 
   db.prepare(`
     INSERT INTO videojuegos(titulo, plataforma, genero, estado, usuario_id)
@@ -22,15 +25,21 @@ export const addGame = (req: Request, res: Response) => {
   res.json({ mensaje: "Juego añadido" });
 };
 
-export const deleteGame = (req: Request, res: Response) => {
-  db.prepare("DELETE FROM videojuegos WHERE id=?")
-    .run(req.params.id);
+export const deleteGame = (req: AuthRequest, res: Response) => {
+  const game: any = db.prepare("SELECT * FROM videojuegos WHERE id=?").get(req.params.id);
+  if (!game) return res.status(404).json({ error: "Juego no encontrado" });
+  if (game.usuario_id !== req.user?.id) return res.status(403).json({ error: "No autorizado" });
+
+  db.prepare("DELETE FROM videojuegos WHERE id=?").run(req.params.id);
 
   res.json({ mensaje: "Juego eliminado" });
 };
 
-export const updateGame = (req: Request, res: Response) => {
+export const updateGame = (req: AuthRequest, res: Response) => {
   const { titulo, plataforma, genero, estado } = req.body;
+  const game: any = db.prepare("SELECT * FROM videojuegos WHERE id=?").get(req.params.id);
+  if (!game) return res.status(404).json({ error: "Juego no encontrado" });
+  if (game.usuario_id !== req.user?.id) return res.status(403).json({ error: "No autorizado" });
 
   db.prepare(`
     UPDATE videojuegos
