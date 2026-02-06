@@ -78,3 +78,21 @@ ul#lista li{
   .form-row{grid-template-columns:1fr}
   .auth-forms{flex-direction:column}
 }
+
+.catalog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:0.75rem;margin-top:0.5rem}
+.catalog-card{display:flex;justify-content:space-between;align-items:center;padding:0.75rem;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03)}
+
+/* modal tweaks (detail) */
+#detailModal{box-shadow:0 20px 60px rgba(2,6,23,0.7);}
+
+/* catalog thumb */
+.catalog-thumb{width:72px;height:72px;border-radius:8px;object-fit:cover;flex-shrink:0}
+
+/* added state */
+.btn-added{background:#334155;color:#9ae6b4;border:none;padding:0.45rem 0.6rem;border-radius:8px}
+
+/* toast/snackbar */
+.toast{position:fixed;right:20px;bottom:20px;background:rgba(2,6,23,0.9);color:#e6eef8;padding:0.75rem 1rem;border-radius:8px;box-shadow:0 8px 24px rgba(2,6,23,0.6);z-index:999;opacity:0;transform:translateY(8px);transition:all 220ms ease}
+.toast.show{opacity:1;transform:translateY(0)}
+
+

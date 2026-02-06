@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "titulo": "The Legend of Zelda: Breath of the Wild",
+    "plataforma": "Switch",
+    "genero": "Aventura",
+    "descripcion": "Explora un vasto mundo abierto, resuelve santuarios, y derrota a Calamity Ganon.",
+    "imagen": "https://via.placeholder.com/96x96.png?text=Zelda"
+  },
+  {
+    "id": 2,
+    "titulo": "God of War",
+    "plataforma": "PS4",
+    "genero": "Acción",
+    "descripcion": "Una intensa historia de Kratos y su hijo Atreus en la mitología nórdica.",
+    "imagen": "https://via.placeholder.com/96x96.png?text=GoW"
+  },
+  {
+    "id": 3,
+    "titulo": "Hollow Knight",
+    "plataforma": "PC",
+    "genero": "Metroidvania",
+    "descripcion": "Un desafiante metroidvania con exploración profunda y combates pulidos.",
+    "imagen": "https://via.placeholder.com/96x96.png?text=HK"
+  }
+]

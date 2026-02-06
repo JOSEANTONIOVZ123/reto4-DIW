@@ -15,6 +15,9 @@
       <h1>Mi colección</h1>
       <div class="muted small">Gestiona tus videojuegos personales</div>
     </header>
+    <div style="display:flex;gap:0.5rem;margin-bottom:1rem">
+      <a href="list.html" class="btn-secondary" style="width:160px;text-align:center;display:inline-block">Explorar juegos</a>
+    </div>
     <main>
       <section class="card">
 <div id="auth">
@@ -52,12 +55,33 @@
   </select>
     <button class="btn-primary" style="width:160px">Añadir</button>
   </form>
-
-  <ul id="lista"></ul>
+  
+  <!-- Lista personal del usuario: aparece en la página principal y contiene botones ❌ para borrar -->
+  <section class="card" id="personalSection" style="margin-top:1rem">
+    <h3>Mi lista</h3>
+    <ul id="lista" class="game-list" style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.5rem">
+      <!-- items añadidos dinámicamente -->
+    </ul>
+  </section>
 </section>
+      <section class="card" id="catalogSection" style="margin-top:1rem">
+
+        <div id="catalog" class="catalog-grid"></div>
+      </section>
+
+      <!-- details modal + overlay -->
+      <div id="modalOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:50"></div>
+      <div id="detailModal" class="card" style="display:none; position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(0.96);opacity:0;transition:all 180ms ease;width:min(720px,90%);z-index:60;">
+        <div style="display:flex;justify-content:flex-end"><button id="closeDetail" class="logout">Cerrar</button></div>
+        <div id="detailContent"></div>
+        <div style="margin-top:1rem;text-align:right">
+          <button id="addFromDetail" class="btn-primary">Añadir a mi lista</button>
+        </div>
+      </div>
     </main>
   </div>
 
   <script src="app.js"></script>
+  <div id="toast" class="toast" style="display:none"></div>
 </body>
 </html>
